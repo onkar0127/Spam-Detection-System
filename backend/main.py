@@ -41,3 +41,10 @@ if __name__ == "__main__":
     import uvicorn
 
     uvicorn.run("backend.main:app", host="0.0.0.0", port=PORT, reload=True)
+
+# -- EMAIL DATABASE ROUTES (Issue #13) ---------------------------------------
+from emails import router as emails_router
+from database import init_db
+
+init_db()
+app.include_router(emails_router)
