@@ -341,14 +341,23 @@ Pre-built images are available — no build step required:
 | Node.js Backend | [rudra2006/spam-node-backend](https://hub.docker.com/r/rudra2006/spam-node-backend) |
 | React Frontend | [rudra2006/spam-frontend](https://hub.docker.com/r/rudra2006/spam-frontend) |
 
-### Quick Start
+### Quick Start (New Users — No Clone Needed)
 
-Clone and run with a single command:
+Images are pre-built on Docker Hub. Just download the compose file and run:
+
+```bash
+curl -O https://raw.githubusercontent.com/Userunknown84/Spam-Detection-System/main/docker-compose.yml
+docker-compose up
+```
+
+Docker will automatically pull all 3 images. No build step, no clone required.
+
+### Quick Start (From Source)
 
 ```bash
 git clone https://github.com/Userunknown84/Spam-Detection-System.git
 cd Spam-Detection-System
-docker-compose up
+docker-compose up --build
 ```
 
 | Service | URL |
