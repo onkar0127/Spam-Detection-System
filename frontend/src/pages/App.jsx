@@ -7,6 +7,7 @@ import api from "../utils/axiosInstance";
 import "../App.css";
 import { useNavigate } from "react-router-dom";
 import FeatureImportance from "../components/FeatureImportance";
+import WordCloud from '../components/WordCloud';
 
 function App() {
   const [text, setText] = useState("");
@@ -147,6 +148,7 @@ const logout = () => {
               </div>
             </div>
           )}
+          <WordCloud darkMode={darkMode} />
 
           {result && confidence !== null && result !== "Error" && (
             <div className="mt-3 text-left">
