@@ -237,7 +237,7 @@ function SpamDetector() {
               </div>
             </div>
           )}
-          <WordCloud darkMode={darkMode} />
+          <WordCloud darkMode={isDark} />
 
           {result && confidence !== null && result !== "Error" && (
             <div className="mt-4 text-left">
