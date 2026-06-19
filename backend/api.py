@@ -178,7 +178,17 @@ def predict():
         with open(LOG_FILE, "a") as f:
             from datetime import datetime
             f.write(f"{datetime.now()} - Prediction: '{text_preview}' -> {final_output}\n")
+        feat
+            
+        return jsonify({
+            "input": text, 
+            "prediction": final_output
+        })
+    
+        # Return response with domain analysis
 
+
+        main
         return jsonify({
             "input": text,
             "prediction": final_output,
