@@ -51,5 +51,10 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
     return true;
   }
 
+  if (message?.type === "SYNC_TOKEN") {
+    chrome.storage.local.set({ authToken: message.payload.token }, () => sendResponse({ ok: true }));
+    return true;
+  }
+
   return false;
 });

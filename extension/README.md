@@ -34,11 +34,16 @@ Spam Detection System classification API as its backend. Implements issue #187.
 1. Click the extension icon → "Open settings".
 2. Set the API base URL (defaults to `http://localhost:3000`, the Node
    gateway used by the rest of this project).
-3. Log into the Spam Detection web app, open devtools on that page, run
+3. Log into the Spam Detection web app. If it's running locally at
+   `localhost:5173` (the Vite dev default), a content script
+   (`src/content/webapp-bridge.js`) picks up your login token from
+   `localStorage` automatically within a few seconds — no manual step needed.
+   Otherwise, open devtools on the web app's page, run
    `localStorage.getItem('token')`, and paste the result into "Account token".
 
-If you deploy the backend somewhere other than `localhost`, add that origin to
-`host_permissions` in `manifest.json` before loading the extension (or use
+If you deploy the frontend or backend somewhere other than `localhost`, add
+that origin to `host_permissions`/the relevant `content_scripts.matches`
+entry in `manifest.json` before loading the extension (or use
 `chrome.permissions.request` — out of scope for this first pass).
 
 ## Privacy

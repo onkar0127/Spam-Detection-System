@@ -41,6 +41,11 @@
         "src/content/outlook.js"
       ],
       "run_at": "document_idle"
+    },
+    {
+      "matches": ["http://localhost:5173/*"],
+      "js": ["src/content/webapp-bridge.js"],
+      "run_at": "document_idle"
     }
   ],
   "browser_specific_settings": {
