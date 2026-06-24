@@ -35,7 +35,8 @@ from apscheduler.schedulers.background import BackgroundScheduler
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*" }})
+ALLOWED_ORIGIN = os.getenv("NODE_GATEWAY_ORIGIN", "http://localhost:3000")
+CORS(app, resources={r"/*": {"origins": ALLOWED_ORIGIN}})
 
 from functools import wraps
 from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity, verify_jwt_in_request
@@ -203,10 +204,8 @@ def predict():
                 prob = 1.0 / (1.0 + np.exp(-score))
                 confidence = round(prob * 100, 2)
         except Exception:
-            # Fallback: use a random confidence for demo (or from model)
-            # In production, use actual confidence from your model
-            import random
-            confidence = round(random.uniform(65, 99), 2)
+            # Fallback: safely set confidence to 0 when prediction probability fails
+            confidence = 0.0
         
         # ─── DETERMINE CONFIDENCE LEVEL ───────────────────────────────
         if confidence >= 80:
