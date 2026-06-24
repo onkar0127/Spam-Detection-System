@@ -7,6 +7,7 @@ const { getHealthStatus } = require('./utils/healthCheck');
 const cors = require("cors");
 const compression = require('compression');
 const { v4: uuidv4 } = require('uuid');
+const helmet = require('helmet');
 const axios = require("axios");
 const mongoose = require("mongoose");
 
@@ -72,6 +73,7 @@ if(process.env.NODE_ENV === 'development'){
 connectWithRetry();
 
 app.use(cors());
+app.use(helmet());
 app.use(compression());
 app.use(express.json());
 
