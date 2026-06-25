@@ -631,7 +631,8 @@ app.get("/gmail/callback", async (req, res) => {
     if (!code) {
       return res.status(400).json({ error: "Authorization code is missing" });
     }
-    res.redirect(`http://localhost:5173/app?provider=gmail&code=${code}`);
+    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+    res.redirect(`${frontendUrl}/app?provider=gmail&code=${code}`);
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ error: "Something went wrong" });
@@ -725,7 +726,8 @@ app.get("/outlook/callback", async (req, res) => {
     if (!code) {
       return res.status(400).json({ error: "Authorization code is missing" });
     }
-    res.redirect(`http://localhost:5173/app?provider=outlook&code=${code}`);
+    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+    res.redirect(`${frontendUrl}/app?provider=outlook&code=${code}`);
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ error: "Something went wrong" });
