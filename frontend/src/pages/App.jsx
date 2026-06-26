@@ -8,6 +8,7 @@ import FeatureImportance from "../components/FeatureImportance";
 import History from "../components/History";
 import WordCloud from "../components/WordCloud";
 import FeedbackWidget from "../components/FeedbackWidget";
+import PredictionExplanation from "../components/PredictionExplanation";
 import Login from "./Login.jsx";
 import Register from "./Register.jsx";
 import EmailHeaderAnalyzer from "../components/EmailHeaderAnalyzer";
@@ -26,6 +27,7 @@ function SpamDetector() {
   const [text, setText] = useState("");
   const [result, setResult] = useState("");
   const [confidence, setConfidence] = useState(null);
+  const [explanation, setExplanation] = useState(null);
   const [loading, setLoading] = useState(false);
   const [type, setType] = useState("message");
   const [copied, setCopied] = useState(false);
@@ -71,8 +73,10 @@ function SpamDetector() {
       });
       setResult(res.data.prediction);
       setConfidence(res.data.confidence ?? null);
+      setExplanation(res.data.explanation ?? null);
     } catch (error) {
       setResult("Error");
+      setExplanation(null);
     } finally {
       setLoading(false);
     }
@@ -582,6 +586,10 @@ function SpamDetector() {
             </div>
           )}
 
+              {explanation && result !== "Error" && (
+                <PredictionExplanation explanation={explanation} result={result} />
+              )}
+
               {result && result !== "Error" && type !== "url" && (
                 <FeedbackWidget
                   key={`${text}|${result}|${confidence}`}
@@ -596,6 +604,7 @@ function SpamDetector() {
                   setText("");
                   setResult("");
                   setConfidence(null);
+                  setExplanation(null);
                   setType("message");
                 }}
                 className={`mt-4 w-full py-3.5 rounded-xl font-bold shadow-sm transition-all ${
